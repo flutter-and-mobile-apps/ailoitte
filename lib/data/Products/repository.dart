@@ -11,9 +11,9 @@ class ProductsRepository implements IProductsRepository {
   final DioManager dio;
   ProductsRepository({required this.dio});
   @override
-  Future<Either<Failure, ProductsModal>> getProducts() async {
+  Future<Either<Failure, ProductsModal>> getProducts(String key) async {
     try {
-      final response = await dio.get('/1/search.php?s=rum');
+      final response = await dio.get('/1/search.php?s=$key');
       if (response.statusCode == 200) {
         final result = ProductsResponse.fromJson(response.data);
 

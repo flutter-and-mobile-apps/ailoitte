@@ -10,6 +10,11 @@ class ProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: TextField(
+        onChanged: (string){
+          BlocProvider.of<ProductsBloc>(context).add(ProductsEvent.search(string));
+        },
+      ),),
       body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
           if (state.isLoading) {
