@@ -17,10 +17,14 @@ class ProductsPage extends StatelessWidget {
       ),),
       body: BlocBuilder<ProductsBloc, ProductsState>(
         builder: (context, state) {
+
           if (state.isLoading) {
             return const Center(
               child: CupertinoActivityIndicator(),
             );
+          }
+          if(!state.isLoading && !state.hasError && state.products.drinks.isEmpty){
+            return const Center(child: Text("Search for a product"),);
           }
           if (state.hasError && !state.isLoading) {
             return Center(

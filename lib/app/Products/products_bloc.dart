@@ -12,6 +12,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final ProductsRepository productsRepository;
   ProductsBloc({required this.productsRepository})
       : super(_Initial(isLoading: false, products: ProductsModal.empty(), hasError: false)) {
+    on<_Started>((event, emit) => emit(state));
     on<_Search>((event, emit) async {
       emit(state.copyWith(isLoading: true));
       final result = await productsRepository.getProducts(event.key);
